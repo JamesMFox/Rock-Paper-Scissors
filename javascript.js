@@ -1,8 +1,7 @@
-
+var humanScore = 0;
+var computerScore = 0;
 
 function getComputerChoice() {
-  let computerChoice = ""
-
   switch (Math.floor(Math.random() * 3)) {
     case 0:
       return "Rock";
@@ -18,10 +17,8 @@ function getComputerChoice() {
 
 function getHumanChoice() {
   var valid_ans = false
-  
   while (!valid_ans) {
     let choice = parseInt(prompt("Type 1 for Rock, 2 for Paper, or 3 for Scissors"));
-  
     switch (choice) {
       case 1:
         return "Rock";
@@ -37,4 +34,37 @@ function getHumanChoice() {
         break;
       }
   }
+}
+
+function playRound(humanChoice, computerChoice) {
+  if (humanChoice === computerChoice) {
+    console.log(`You both chose ${humanChoice}`)
+  } else {
+    if (humanChoice === "Rock") {
+      if (computerChoice === "Scissors") {
+        humanScore++;
+        console.log("You win! Rock smashes Scissors.");
+      } else {
+        computerScore++;
+        console.log("You lose! Paper covers Rock.");
+      }
+    } else if (humanChoice === "Paper") {
+      if (computerChoice === "Rock") {
+        humanScore++;
+        console.log("You win! Paper covers Rock");
+      } else {
+        computerScore++;
+        console.log("You lose! Scissors cuts Paper");
+      }
+    } else if (humanChoice === "Scissors") {
+      if (computerChoice === "Rock") {
+        computerScore++;
+        console.log("You lose! Rock smashes Scissors");
+      } else {
+        humanScore++;
+        console.log("You win! Scissors cuts Paper");
+      }
+    }
+  }
+  console.log(humanScore);
 }
