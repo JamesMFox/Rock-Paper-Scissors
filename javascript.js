@@ -1,7 +1,3 @@
-
-
-
-
 function getComputerChoice() {
   switch (Math.floor(Math.random() * 3)) {
     case 0:
@@ -45,7 +41,7 @@ function playGame() {
   var tieScore = 0;
   var computerChoice = "";
 
-
+  //create the rock, paper, scissors buttons
   const rockBtn = document.createElement("button");
   rockBtn.textContent = ("Rock");
   document.body.appendChild(rockBtn);
@@ -55,69 +51,79 @@ function playGame() {
   const scissorsBtn = document.createElement("button");
   scissorsBtn.textContent = ("Scissors");
   document.body.appendChild(scissorsBtn);
+
+
+
+
+  //add event listeners and call the play round function
+    rockBtn.addEventListener("click" , () => {
+      let humanChoice = "Rock";
+      if (humanScore < 5 && computerScore < 5) {
+        playRound(humanChoice, getComputerChoice());
+      }
+    });
+
+    paperBtn.addEventListener("click", () => {
+      let humanChoice = "Paper";
+      if (humanScore < 5 && computerScore < 5) {
+        playRound(humanChoice, getComputerChoice());
+      }
+    });
+
+    scissorsBtn.addEventListener("click", () => {
+      let humanChoice = "Scissors"
+      if (humanScore < 5 && computerScore < 5) {
+        playRound(humanChoice, getComputerChoice());
+      }
+    });
   
-  rockBtn.addEventListener("click" , () => {
-    let humanChoice = "Rock";
-    playRound(humanChoice, getComputerChoice());
-  })
-  paperBtn.addEventListener("click", () => {
-    let humanChoice = "Paper";
-    playRound(humanChoice, getComputerChoice());
-  })
-  scissorsBtn.addEventListener("click", () => {
-    let humanChoice = "Scissors"
-    playRound(humanChoice, getComputerChoice());
-  })
 
-
-
-
-
-
-
-
-
-
-  if (humanScore > computerScore) {
-    console.log("You Win the game!!!");
-  } else {
-    console.log("You did not win the game");
-  }
-  console.log(`You scored: ${humanScore}`);
-  console.log(`Computer scored: ${computerScore}`);
-  console.log(`${tieScore} tied rounds`)
-  
-  
+  // Create a div for the scores
+  const scoreDiv = document.createElement("div");
+  const runningScoreDiv = document.createElement("div");
+  const resultsDiv = document.createElement("div");
+  scoreDiv.appendChild(runningScoreDiv);
+  scoreDiv.appendChild(resultsDiv);
+  document.body.appendChild(scoreDiv);
+ 
   function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
       tieScore++;
-      console.log(`You both chose ${humanChoice}`)
+      resultsDiv.innerText = `You both chose ${humanChoice}`;
     } else {
       if (humanChoice === "Rock") {
         if (computerChoice === "Scissors") {
           humanScore++;
-          console.log("You win! Rock smashes Scissors.");
+          resultsDiv.innerText = "You win! Rock smashes Scissors."
         } else {
           computerScore++;
-          console.log("You lose! Paper covers Rock.");
+          resultsDiv.innerText = "You lose! Paper covers Rock."
         }
       } else if (humanChoice === "Paper") {
         if (computerChoice === "Rock") {
           humanScore++;
-          console.log("You win! Paper covers Rock");
+          resultsDiv.innerText = "You win! Paper covers Rock"
         } else {
           computerScore++;
-          console.log("You lose! Scissors cuts Paper");
+          resultsDiv.innerText = "You lose! Scissors cuts Paper"
         }
       } else if (humanChoice === "Scissors") {
         if (computerChoice === "Rock") {
           computerScore++;
-          console.log("You lose! Rock smashes Scissors");
+          resultsDiv.innerText = "You lose! Rock smashes Scissors"
         } else {
           humanScore++;
-          console.log("You win! Scissors cuts Paper");
+          resultsDiv.innerText = "You win! Scissors cuts Paper"
         }
       }
     }
+    if (humanScore >= 5 || computerScore >= 5){
+      if (humanScore > computerScore) {
+        resultsDiv.innerText = "You Win the game!!!"
+      } else {
+        resultsDiv.innerText = "You did not win the game"
+      }
+    }
+    runningScoreDiv.innerText = `Your Score: ${humanScore}, Computer Score: ${computerScore}`;
   }
 }
