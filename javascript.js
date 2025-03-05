@@ -1,5 +1,7 @@
 
 
+
+
 function getComputerChoice() {
   switch (Math.floor(Math.random() * 3)) {
     case 0:
@@ -41,12 +43,41 @@ function playGame() {
   var humanScore = 0;
   var computerScore = 0;
   var tieScore = 0;
+  var computerChoice = "";
 
-  for (i = 0; i < 5; i++) {
-    let humanselection = getHumanChoice();
-    let computerselection = getComputerChoice();
-    playRound(humanselection, computerselection);
-  }
+
+  const rockBtn = document.createElement("button");
+  rockBtn.textContent = ("Rock");
+  document.body.appendChild(rockBtn);
+  const paperBtn = document.createElement("button");
+  paperBtn.textContent = ("Paper");
+  document.body.appendChild(paperBtn);
+  const scissorsBtn = document.createElement("button");
+  scissorsBtn.textContent = ("Scissors");
+  document.body.appendChild(scissorsBtn);
+  
+  rockBtn.addEventListener("click" , () => {
+    let humanChoice = "Rock";
+    playRound(humanChoice, getComputerChoice());
+  })
+  paperBtn.addEventListener("click", () => {
+    let humanChoice = "Paper";
+    playRound(humanChoice, getComputerChoice());
+  })
+  scissorsBtn.addEventListener("click", () => {
+    let humanChoice = "Scissors"
+    playRound(humanChoice, getComputerChoice());
+  })
+
+
+
+
+
+
+
+
+
+
   if (humanScore > computerScore) {
     console.log("You Win the game!!!");
   } else {
